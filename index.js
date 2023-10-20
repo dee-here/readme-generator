@@ -21,14 +21,14 @@ const questions = [
         type: "input",
         message: "Enter Deployed link :",
         name: "deployedLink",
-        default: "Deployed Link..",
+        default: "https://dee-here.github.io/space-jam-x/",
     },
-    // {
-    //     type: "confirm",
-    //     message: "Create Table Of Contents section ?",
-    //     name: "tableOfContents",
-    //     default: false,
-    // },
+    {
+        type: "confirm",
+        message: "Create Table Of Contents section ?",
+        name: "tableOfContents",
+        default: false,
+    },
     {
         type: "input",
         message: "Enter Installation Section text :",
@@ -52,12 +52,10 @@ const questions = [
         name: 'license',
         message: 'Select your license :',
         choices: [
-          'Red',
-          'Green',
-          'Blue',
-          'Yellow',
-          'Orange',
-          'Purple',
+          'MIT',
+          'Apache',
+          'GPL',
+          'Unlicense',
         ],
         when: (answer) => answer.addLicense === true,
     },
@@ -93,10 +91,6 @@ function init() {
     console.log("init in index: ");
     inquirer.prompt(questions)
         .then(answers => {
-            console.log("answers ", answers);
-
-            //checking the answer.section generate markdowns..
-            console.log(generateMarkdown(answers));
             writeToFile("README.md",generateMarkdown(answers));
         });
 

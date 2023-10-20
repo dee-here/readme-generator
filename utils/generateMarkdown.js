@@ -1,26 +1,51 @@
+// License badges for licenses
+const licenseBadges = {
+  MIT: 'https://img.shields.io/badge/License-MIT-yellow.svg',
+  Apache: 'https://img.shields.io/badge/License-Apache%202.0-blue.svg',
+  GPL: 'https://img.shields.io/badge/License-GPL%20v3-blue.svg',
+  Unlicense: 'https://img.shields.io/badge/license-Unlicense-blue.svg',
+};
+
+const licenseLinks = {
+  MIT: 'https://choosealicense.com/licenses/mit/',
+  Apache: 'https://choosealicense.com/licenses/apache-2.0/',
+  GPL: 'https://choosealicense.com/licenses/gpl-3.0/',
+  Unlicense: 'https://choosealicense.com/licenses/unlicense/',
+};
+
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 // should have a couple license options
-function renderLicenseBadge(license) {
+function renderLicenseBadge(data) {
 //   console.log("renderLicenseBadge ", license);
 //   return `## Description 
 // ${license.description}  `;
+
+ return `![License Badge](${licenseBadges[data.license]})  \n`;
+
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {
+function renderLicenseLink(data) {
   //* return a string that has the link to selected license
+  return `[License Link](${licenseLinks[data.license]})  \n`;
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {
+function renderLicenseSection(data) {
   //* create a conditional to check if license exists
   //* call renderlicenseBadge and renderlicenseLink
   //* use template literal to format license section and call functions
   //* return template literal
-
+  if (data.addLicense) {
+    return `## License 
+${renderLicenseBadge(data)}
+${renderLicenseLink(data)}  `;
+  }
+  return ``;
 }
 
 //genearte title
@@ -36,7 +61,8 @@ ${data.description}  `;
 }
 //genearte deployed link
 function generateDeployedLink(data) {
-  return `[${data.title}](${data.deployedLink})  `;
+  return `[${data.title}](${data.deployedLink})  
+`;
 }
 //genearte instalation
 function generateInstallation(data) {
@@ -59,8 +85,30 @@ function generateTests(data) {
 ${data.test}  `;
   }
 
+//get license section for TOC
+function getLicenseforToc(data) {
+  if(data.tableOfContents) {
+    return `- [License](#license)  `;
+  } else return ``;
+}  
+
+// generate table of contents
+function generateTableOfContents(data) {
+  if(data.tableOfContents) {
+    return `\n
+## Table of Contents  
+- [Description](#description)  
+${getLicenseforToc(data)}
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Contribution](#contribution)  
+- [Tests](#tests)  
+- [Author Info](#author-info)  \n`;
+  } else return ``;
+}
+
 // generate author info
-function generateAuthor(data) {
+function generateAuthor() {
   return `## Author Info
 
 Deepak Sinha
@@ -79,12 +127,19 @@ function generateMarkdown(data) {
   //${renderLicenseBadge(data)}
 
   return `${generateTitle(data)}
+
 ${generateDescription(data)}
+${generateTableOfContents(data)}
+${renderLicenseSection(data)}
 ${generateInstallation(data)}
+
 ${generateUsage(data)}
+
 ${generateContribution(data)}
+
 ${generateTests(data)}
-${generateAuthor(data)}
+
+${generateAuthor()}
 `;
 }
 

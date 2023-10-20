@@ -87,9 +87,11 @@ ${data.test}  `;
 
 //get license section for TOC
 function getLicenseforToc(data) {
-  if(data.tableOfContents) {
-    return `- [License](#license)  `;
-  } else return ``;
+  if(data.tableOfContents && data.addLicense) {
+    return `
+- [License](#license)  `;
+  };
+  return '';
 }  
 
 // generate table of contents
@@ -97,14 +99,14 @@ function generateTableOfContents(data) {
   if(data.tableOfContents) {
     return `\n
 ## Table of Contents  
-- [Description](#description)  
+- [Description](#description)
 ${getLicenseforToc(data)}
 - [Installation](#installation)  
 - [Usage](#usage)  
 - [Contribution](#contribution)  
 - [Tests](#tests)  
 - [Author Info](#author-info)  \n`;
-  } else return ``;
+  } else return '';
 }
 
 // generate author info

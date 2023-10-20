@@ -7,8 +7,8 @@ Project description..
 
 
 ## Table of Contents  
-- [Description](#description)  
-- [License](#license)  
+- [Description](#description)
+
 - [Installation](#installation)  
 - [Usage](#usage)  
 - [Contribution](#contribution)  

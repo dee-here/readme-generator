@@ -18,10 +18,6 @@ const licenseLinks = {
 // If there is no license, return an empty string
 // should have a couple license options
 function renderLicenseBadge(data) {
-//   console.log("renderLicenseBadge ", license);
-//   return `## Description 
-// ${license.description}  `;
-
  return `![License Badge](${licenseBadges[data.license]})  \n`;
 
 }
@@ -41,82 +37,80 @@ function renderLicenseSection(data) {
   //* use template literal to format license section and call functions
   //* return template literal
   if (data.addLicense) {
-    return `## License 
+    return `## License
 ${renderLicenseBadge(data)}
-${renderLicenseLink(data)}  `;
+${renderLicenseLink(data)}\n`;
   }
   return ``;
 }
 
-//genearte title
+//generate title
 
 function generateTitle(data) {
-  return `# ${data.title}  `;
+  return `# ${data.title}
+${renderLicenseBadge(data)}\n`;
 }
-//genearte desc
+//generate desc
 function generateDescription(data) {
   return `## Description 
 ${generateDeployedLink(data)}
-${data.description}  `;
+${data.description}\n`;
 }
-//genearte deployed link
+//generate deployed link
 function generateDeployedLink(data) {
-  return `[${data.title}](${data.deployedLink})  
-`;
+  return `[${data.title}](${data.deployedLink})\n`;
 }
-//genearte instalation
+//generate instalation
 function generateInstallation(data) {
   return `## Installation 
-${data.installation}  `;
+${data.installation}\n`;
 }
-//genearte Usage
+//generate Usage
 function generateUsage(data) {
   return `## Usage
-${data.usage}  `;
+${data.usage}\n`;
 }
-//genearte contributions
+//generate contributions
 function generateContribution(data) {
   return `## Contribution
-${data.contribution}  `;
+${data.contribution}\n`;
   }
-//genearte tests
+//generate tests
 function generateTests(data) {
   return `## Tests
-${data.test}  `;
+${data.test}\n`;
   }
 
 //get license section for TOC
 function getLicenseforToc(data) {
   if(data.tableOfContents && data.addLicense) {
-    return `
-- [License](#license)  `;
-  };
-  return '';
+    return `- [License](#license)\n`;
+  } else return '';
 }  
 
 // generate table of contents
 function generateTableOfContents(data) {
   if(data.tableOfContents) {
-    return `\n
-## Table of Contents  
+    return `## Table of Contents  
 - [Description](#description)
-${getLicenseforToc(data)}
 - [Installation](#installation)  
 - [Usage](#usage)  
 - [Contribution](#contribution)  
 - [Tests](#tests)  
-- [Author Info](#author-info)  \n`;
+- [Author Info](#author-info)  
+${getLicenseforToc(data)}\n`;
   } else return '';
 }
 
 // generate author info
-function generateAuthor() {
+function generateAuthor(data) {
+ 
   return `## Author Info
 
-Deepak Sinha
-  
-* [Portfolio](https://dee-here.github.io/portfolio/)
-* [Github](https://github.com/dee-here)  `;
+${data.name}
+* [Portfolio](https://${data.github}.github.io/portfolio/)
+* [Github](https://github.com/${data.github})
+* [Questions ](mailto:${data.email})\n`;
   } 
 
 
@@ -129,20 +123,15 @@ function generateMarkdown(data) {
   //${renderLicenseBadge(data)}
 
   return `${generateTitle(data)}
-
 ${generateDescription(data)}
 ${generateTableOfContents(data)}
-${renderLicenseSection(data)}
 ${generateInstallation(data)}
-
 ${generateUsage(data)}
-
 ${generateContribution(data)}
-
 ${generateTests(data)}
-
-${generateAuthor()}
-`;
+${generateAuthor(data)}
+${renderLicenseSection(data)}\n`
+;
 }
 
 module.exports = generateMarkdown;

@@ -18,16 +18,16 @@ A dynamic website that is visually appealing and allows users to view past and c
 
 
 ## Installation 
-No installtion required
+This is a web based application and can be accessed using a browser.
 
 ## Usage
-Users can view the NASA Astronomy POD in this section. They can also select a past day to view the image for that day. Details displayed alongside the image are the title, description and date
+Users can view the Astronomy Pic of the Day- APOD and search for pics of the day for past dates using a date picker. They can also Search for Near Earth Objects approaching Earth for a sepcific date. Users can also do a NASA image search using the search Images section. The application also saves the last eight unique searches to local storage and creates clickable links to easily redo those searches.
 
 ## Contribution
-Create a branch and a Pull request to the main branch.
+Please create a new branch from main and use that to create a Pull request to get those merged into the project.
 
 ## Tests
-Test Instructions
+Test if the website renders and the date pickers work and images are displayed on the website when a user first launches the application.
 
 ## Author Info
 
